@@ -13,12 +13,13 @@ function ApplicationPopup({ opportunity, onClose }) {
   const [skills, setSkills] = useState("");
   const [resume, setResume] = useState(null);
   const navigate = useNavigate();
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem("token");
     if (!token) {
       toast.error("Login to apply for Opportunity");
+      navigate("/login")
       return;
     }
     const formData = new FormData();
