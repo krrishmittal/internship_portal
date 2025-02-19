@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+// import { useNavigate } from "react-router-dom";
+// import { toast } from "react-toastify";
+import ApplicationPopup from "./ApplicationPopup";
 
 function OpportunityCard({ opportunity }) {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [hasApplied, setHasApplied] = useState(false);
+  const [showPopup, setShowPopup] = useState(false); 
 
   useEffect(() => {
     const checkAppliedStatus = async () => {
@@ -25,45 +27,8 @@ function OpportunityCard({ opportunity }) {
     checkAppliedStatus();
   }, [opportunity.id]);
 
-  const applyOnOpportunity = async () => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      toast.error("Login to apply for Opportunity");
-      navigate("/login");
-      return;
-    }
-    try {
-      const response = await fetch("https://internship-backend-bkhn.onrender.com/auth/apply", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          opportunityId: opportunity.id,
-          title: opportunity.title,
-          company_name: opportunity.company_name,
-          duration: opportunity.duration,
-        }),
-        credentials: "include",
-      });
-      if (response.status === 401) {
-        localStorage.removeItem("token");
-        navigate("/login");
-        return;
-      }
-      if (!response.ok) {
-        throw new Error("Application failed");
-      }
-      const data = await response.json();
-      localStorage.setItem("applicationId", data.applicationId);
-      setHasApplied(true);
-      toast.success("Application successful! ");
-      navigate("/dashboard");
-    } catch (error) {
-      console.error("Application error:", error);
-      toast.error(error.message);
-    }
+  const handleApplyClick = () => {
+    setShowPopup(true);
   };
 
   return (
@@ -75,9 +40,13 @@ function OpportunityCard({ opportunity }) {
       <p><strong>Location:</strong> {opportunity.locations && opportunity.locations.length > 0 ? opportunity.locations.map((item) => item.string.trim()).filter((loc) => loc).join(", ")
         : "Remote"}
       </p>
-      <button onClick={applyOnOpportunity} disabled={hasApplied}>
+      <button onClick={handleApplyClick} disabled={hasApplied}>
         {hasApplied ? "You have already applied" : "Apply Here"}
       </button>
+
+      {showPopup && (
+        <ApplicationPopup opportunity={opportunity} onClose={() => setShowPopup(false)} />
+      )}
     </div>
   );
 }

@@ -35,7 +35,6 @@ body {
   }
 }
 
-/* Navigation Styles */
 nav {
   background-color: white;
   padding: 1.3rem;
@@ -134,7 +133,6 @@ nav ul li button:hover {
   }
 }
 
-/* Form Container Styles */
 .form-container {
   max-width: 400px;
   margin: auto;
@@ -219,13 +217,12 @@ nav ul li button:hover {
   color: #4a90e2;
 }
 
-/* Opportunities Page Styles */
 .opportunities-page {
   display: flex;
   justify-content: center;
   align-items: flex-start;
   padding: 20px;
-  margin-top: 80px; /* Ensure it doesn't overlap with the navbar */
+  margin-top: 80px;
 }
 
 .opportunities-container {
@@ -241,10 +238,10 @@ nav ul li button:hover {
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: 250px;
-  max-height: 400px; /* Set a fixed height */
-  overflow-y: auto; /* Allow scrolling if content overflows */
-  position: sticky; /* Keep it in view when scrolling */
-  top: 100px; /* Adjust to prevent overlap with navbar */
+  max-height: 400px;
+  overflow-y: auto;
+  position: sticky;
+  top: 100px;
   z-index: 1;
 }
 
@@ -280,7 +277,7 @@ nav ul li button:hover {
 }
 
 .filter-toggle-button {
-  display: none; /* Hidden by default */
+  display: none;
   background-color: #4a90e2;
   color: white;
   border: none;
@@ -302,24 +299,36 @@ nav ul li button:hover {
   }
 
   .filter-toggle-button {
-    display: block; /* Show button on mobile */
+    display: block;
   }
 
   .filter-section {
     width: 100%;
-    max-height: none; /* Remove fixed height for mobile */
-    position: relative; /* Reset position for mobile */
-    top: 0; /* Reset top for mobile */
-    margin-bottom: 20px; /* Add space below filter section */
-    display: none; /* Hidden by default on mobile */
+    max-height: none;
+    position: relative;
+    top: 0;
+    margin-bottom: 20px;
+    display: none;
   }
 
   .filter-section.active {
-    display: block; /* Show when active */
+    display: block;
   }
 
   .opportunities-list {
     width: 100%;
+  }
+
+  .profile-content {
+    width: 95%;
+  }
+
+  .add-skill {
+    flex-direction: column;
+  }
+
+  .add-skill input {
+    margin-bottom: 10px;
   }
 }
 
@@ -344,7 +353,7 @@ nav ul li button:hover {
   padding: 1.5rem;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: box-shadow 0.3s ease;
   width: 100%;
   max-width: 600px;
   position: relative;
@@ -352,7 +361,6 @@ nav ul li button:hover {
 }
 
 .opportunity-card:hover {
-  transform: scale(1.05);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
@@ -464,7 +472,6 @@ nav ul li button:hover {
   }
 }
 
-/* Profile Page Styles */
 .profile-page {
   position: relative;
   display: flex;
@@ -569,7 +576,6 @@ nav ul li button:hover {
   background-color: #357abd;
 }
 
-/* Skills Section */
 .skills-section {
   margin-top: 2rem;
 }
@@ -628,7 +634,6 @@ nav ul li button:hover {
   background: #357abd;
 }
 
-/* Confirmation Modal */
 .confirmation-modal {
   position: fixed;
   top: 0;
@@ -671,7 +676,6 @@ nav ul li button:hover {
   border-radius: 4px;
 }
 
-/* Responsive Styles */
 @media (max-width: 768px) {
   .opportunities-container {
     flex-direction: column;
@@ -679,20 +683,20 @@ nav ul li button:hover {
   }
 
   .filter-toggle-button {
-    display: block; /* Show button on mobile */
+    display: block;
   }
 
   .filter-section {
     width: 100%;
-    max-height: none; /* Remove fixed height for mobile */
-    position: relative; /* Reset position for mobile */
-    top: 0; /* Reset top for mobile */
-    margin-bottom: 20px; /* Add space below filter section */
-    display: none; /* Hidden by default on mobile */
+    max-height: none;
+    position: relative;
+    top: 0;
+    margin-bottom: 20px;
+    display: none;
   }
 
   .filter-section.active {
-    display: block; /* Show when active */
+    display: block;
   }
 
   .opportunities-list {
@@ -709,5 +713,91 @@ nav ul li button:hover {
 
   .add-skill input {
     margin-bottom: 10px;
+  }
+}
+
+.popup {
+  position: fixed;
+  top: 110px;
+  left: 120px;
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  z-index: 2000;
+  width: 90%;
+  max-width: 400px;
+  max-height: 80vh;
+  overflow-y: auto;
+  animation: fadeIn 0.3s ease;
+}
+
+.popup h2 {
+  margin-bottom: 20px;
+  color: #4a90e2;
+  text-align: center;
+}
+
+.popup form {
+  display: flex;
+  flex-direction: column;
+}
+
+.popup label {
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #333;
+}
+
+.popup input[type="text"],
+.popup input[type="email"],
+.popup input[type="tel"],
+.popup input[type="date"],
+.popup input[type="file"],
+.popup textarea {
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.popup input[type="text"]:focus,
+.popup input[type="email"]:focus,
+.popup input[type="tel"]:focus,
+.popup input[type="date"]:focus,
+.popup textarea:focus {
+  border-color: #4a90e2;
+  outline: none;
+}
+
+.popup button {
+  margin-top: 10px;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  background-color: #4a90e2;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.popup button:hover {
+  background-color: #357abd;
+}
+
+.popup button[type="button"] {
+  background-color: #dc3545;
+}
+
+.popup button[type="button"]:hover {
+  background-color: #c82333;
+}
+
+@media (max-width: 768px) {
+  .popup {
+    width: 95%;
   }
 }
